@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Simple Calc</h1>
+
+    <form>
+        <label for="numero1">Primeiro Número</label>
+        <input type="number" id = "numero1" placeholder="Primeiro Número">
+        <br><br>
+
+        <label for="numero2">Segundo Número</label>
+        <input type="number" id = "numero2" placeholder="Segundo Número">
+        <br><br>
+
+        <label for="operacao">Operação</label>
+
+        <select id="operacao">
+
+            <option value="">Selecione</option>
+            <option value="+">Soma</option>
+            <option value="-">Subtração</option>
+            <option value="*">Multiplicacão</option>
+            <option value="/">Divisão</option>
+        </select>
+
+
+        <button onclick="calcular()">Calcular</button>
+    </form>
+
+    <script>
+        function calcular(){
+            event.preventDefault();
+            let n1 = document.getElementById("numero1").value;
+            let n2 = document.getElementById("numero2").value;
+            let res = parseFloat(n1) + parseFloat(n2)
+            let op = '-'
+            console.log(n1);
+            console.log(n2);
+
+       
+            if(op == '+'){
+                res = n1 + n2;
+                console.log(`Resultado: ${res}`)
+            }else if ('-'){
+                res = n1 - n2;
+                console.log(`Resultado: ${res}`)
+            }
+        
+            //criar a validação para toda as opções,inclusive a inválida
+            //criar função para cada operação
+        }//fim da função calcular
+
+        function somar(x,y) {
+            return x + y;            
+        }
+
+        function subtrair(x,y){
+            return x - y;
+        }
+
+        function multiplicar(x,y){
+            return x- y;
+        }
+
+        function Dividir(x,y) {
+            return x / y;
+        }
+    </script>
+</body>
+</html>

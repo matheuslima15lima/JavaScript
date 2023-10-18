@@ -32,7 +32,17 @@ function calcular(e) {
     listaPessoas.push(pessoa);
 
     exibirDados();
+    limparFormulario();
+  
+}
 
+function limparFormulario()
+{
+      //limpar os campos do formulário
+      document.getElementById("nome").value = ""
+      document.getElementById("altura").value = ""
+       document.getElementById("peso").value = ""
+  
 }
 
 function calcularImc(peso, altura) {
@@ -81,7 +91,7 @@ function exibirDados() {
                 <td>${oPessoa.nome}</td>
                 <td>${oPessoa.altura}</td>
                 <td>${oPessoa.peso}</td>
-                <td>${oPessoa.imc}</td>
+                <td>${oPessoa.imc.toFixed(2)}</td>
                 <td>${oPessoa.situacao}</td>
             </tr>
             `;

@@ -1,0 +1,12 @@
+{
+  "imc": [
+    {
+      "nome": "Miguelito",
+      "altura": "1.80",
+      "peso": 80,
+      "situacao": "Tá dBoa",
+      "imc": 42.9,
+      "id": 2
+    }
+  ]
+}

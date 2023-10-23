@@ -10,7 +10,7 @@
 
 <body>
 
-    <form>
+    <form onsubmit="cadastrar(event)">
         <label for="cep">CEP</label>
         <input type="number" placeholder="digite o cep" id="cep" onblur="chamarApi()" />
         <span id="not-found"></span>
@@ -19,7 +19,6 @@
         <label for="endereco">Endereço</label>
         <input type="text" placeholder=" ... " id="endereco" />
         <br /><br />
-
         <label for="bairro">Bairro</label>
         <input type="text" placeholder=" ... " id="bairro" />
         <br /><br />
@@ -31,9 +30,25 @@
         <label for="estado">Estado</label>
         <input type="text" placeholder=" ... " id="estado" />
         <br /><br />
+
+        <label for="nome">Nome</Nabel>
+        <input type="text" placeholder=" ... " id="nome" />
+        <br /><br />
+
+        <label for="telefone">Telefone</Nabel>
+        <input type="number" placeholder=" ... " id="telefone" />
+        <br /><br />
+
+        <label for="numero">Nº da casa</Nabel>
+        <input type="number" placeholder=" ... " id="numero" />
+        <br /><br />
+
+
+        <button>Salvar contato</button>
     </form>
-    <button>Chamar api</button>
+
     <script>
+        const urlLocal ="  http://localhost:3000/contatos"
 
         //  fetch("https://viacep.com.br/ws/09510200/json/")
         // .then( retorno => {
@@ -44,6 +59,36 @@
         //     console.log("Deu ruim na api");
         //     console.log("Eduardo OOOOOOO");
         // })
+
+        async function cadastrar(e) {
+            e.preventDefault();//captura o evento de submit do form
+            //pegar os dados do formulario
+            const cep = document.getElementById("cep").value;
+            const endereco = document.getElementById("endereco").value;
+            const bairro = document.getElementById("bairro").value;
+            const cidade = document.getElementById("cidade").value;
+            const estado = document.getElementById("estado").value;
+            const nome = document.getElementById("nome").value;
+            const telefone = document.getElementById("telefone").value;
+            const numero = document.getElementById("numero").value;
+
+
+            const objDados = {cep, endereco, bairro, cidade, estado, nome, telefone, numero};//passando os dados a serem cadastrados acima para o json
+            try {
+                const promise = await fetch(urlLocal, {
+                    body : JSON.stringify(objDados),
+                    headers : {"Content-Type" : "application/json"},
+                    method: "post"
+                });
+
+                const retorno = promise.json();//pega o retorno da api
+                console.log(retorno);
+                
+            } catch (error) {
+                alert("Deu ruim" + error)
+            }
+        }
+
 
         async function chamarApi() {
             const cep = document.getElementById("cep").value;
@@ -64,7 +109,7 @@
                 limparEndereco();
                 //O inner text serve para mostrar um texto para o usuario, diferente do
                 // .value que serve para acessar um valor adicionado pelo usuario
-               
+
                 document.getElementById("not-found").innerText = "Cep Inválido"
             }
 

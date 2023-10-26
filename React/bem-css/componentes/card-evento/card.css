@@ -1,0 +1,47 @@
+.alinhar{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.card{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 10%;
+    height:300px;
+    border: 1px solid black;
+    border-radius: 5px;
+    
+    padding-left: 35px;
+    padding-right: 35px;
+    
+    
+}
+
+.card__conectar{
+    color:red;
+}
+
+.card__descricao{
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 10px;
+}
+
+.card__conectar--disable{
+    color: grey;
+    cursor:not-allowed;
+}
+
+.card__title{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 20px;
+}
+
+
+
+
+
+

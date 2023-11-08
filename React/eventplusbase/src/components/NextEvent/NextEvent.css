@@ -33,6 +33,10 @@
     font-size: 1rem;
 }
 
+.event-card::-webkit-scrollbar{
+    width: 0px
+}
+
 .event-card__description {
     font-family: Poppins-Regular;
     font-size: 1rem;

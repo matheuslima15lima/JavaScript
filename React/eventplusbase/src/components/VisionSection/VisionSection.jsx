@@ -1,5 +1,6 @@
 import React from 'react';
 import Title from '../Title/Title';
+import './VisionSection.css'
 const VisionSection = () => {
     return (
         <section className='vision'>

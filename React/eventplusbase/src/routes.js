@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import HomePage from "./Pages/HomePage/HomePage";
-import TipoEventos from "./Pages/TipoEventos/TipoEventos";
+import TipoEventos from "./Pages/TipoEventos/TipoEventoPage";
 import EventosPage from "./Pages/EventosPage/EventosPage";
 import LoginPage from "./Pages/LoginPage/LoginPage";
 import TestePage  from "./Pages/TestePage/TestePage";

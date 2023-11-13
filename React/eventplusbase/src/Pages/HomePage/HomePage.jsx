@@ -9,16 +9,17 @@ import NextEvent from '../../components/NextEvent/NextEvent';
 import Container from '../../components/Container/Container'
 import './HomePage.css'
 import api from "../../Services/Services";
+
 const HomePage = () => {
 
     useEffect(()=> {
         //continuar aqui
         async function getProximosEventos(){
           try {
-            const promise = await api.get("Evento/ListarProximos");
+            const promise = await api.get("/Evento/ListarProximos");
             setNextEvents(promise.data)
           } catch (error) {
-            alert('Deu ruim na api')
+            console.log('Deu ruim na api');
           }
         }
         getProximosEventos();
@@ -26,10 +27,7 @@ const HomePage = () => {
     } ,[])
 
     //fake mock - api mocada
-    const [nextEvents, setNextEvents] = useState([
-      {id: 1, title: "Evento x", descricao:"Evento de SQL Server" ,data:"10/11/2023"},
-      {id: 2, title: "Evento y", descricao:"Bora codar JS" ,data:"11/11/2023"}
-    ]);
+    const [nextEvents, setNextEvents] = useState([]);
 
     return (
       <MainContent>

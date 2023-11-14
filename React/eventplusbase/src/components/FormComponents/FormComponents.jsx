@@ -1,5 +1,5 @@
 import React from 'react';
-
+import "./FormComponents.css"
 export const Input = ({
     type,
     id,
@@ -17,10 +17,24 @@ export const Input = ({
         name={name}
         value={value}
         required = {required}
-        className={`input-component${additionalClass}`}
+        className={`input-component ${additionalClass}`}
         placeholder={placeholder}
         autoComplete='off'
-        
+        onChange={manipulationFunction}
         />
     )
+}
+
+export const Button = ({textButton,id, name, type, additionalClass, manipulationFunction}) => {
+    return(
+        <button 
+        type={type}
+        name={name}
+        id= {id}
+        className={`button-component ${additionalClass}`}
+        onClick={manipulationFunction}
+        >
+            {textButton}
+        </button>
+    );
 }

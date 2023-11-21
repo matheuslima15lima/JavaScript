@@ -3,10 +3,10 @@
 
 import React, { useEffect } from "react";
 // , { useEffect, useState }
-import successIlustrator from "../../assets/images/success-illustration.svg";
-import warningIlustrator from "../../assets/images/warning-illustration.svg";
-import dangerIllustrator from "../../assets/images/error-illustration.svg";
-import defaultIllustrator from "../../assets/images/default-image.jpeg";
+import successIlustrator from "../../Assets/images/images/success-illustration.svg";
+import warningIlustrator from "../../Assets/images/images/warning-illustration.svg";
+import dangerIllustrator from "../../Assets/images/images/error-illustration.svg";
+import defaultIllustrator from "../../Assets/images/images/default-image.jpeg";
 
 import "./Notification.css";
 

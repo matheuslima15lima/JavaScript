@@ -22,7 +22,7 @@ const NextEvent = ({title, description, eventDate, idEvento}) => {
             {description.substr(0,16)} ...
             
             </p>
-        <p className='event-card__description'>{eventDate}</p>
+        <p className='event-card__description'>{new Date (eventDate).toLocaleDateString()}</p>
         <a
         onClick = {()=> {conectar(idEvento)}}
         href="" className='event-card__connect-link'>Conectar</a>

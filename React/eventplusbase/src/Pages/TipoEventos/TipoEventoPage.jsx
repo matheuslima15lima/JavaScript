@@ -127,7 +127,7 @@ const TipoEventos = () => {
     try {
       const deletado = await api.delete(`/TiposEvento/${idEvento}`);
       const retornoGet = await api.get("/TiposEvento");
-      setTitulo({ titulo });
+      setTipoEventos( retornoGet.data );
     } catch (error) {
       console.log("Deu ruim aqui no delete");
     }
@@ -221,7 +221,7 @@ const TipoEventos = () => {
             fnUpdate={showUpdateForm}
             fnDelete={handleDelete}
           />
-     
+      
         </Container>
       </section>
     </MainContent>

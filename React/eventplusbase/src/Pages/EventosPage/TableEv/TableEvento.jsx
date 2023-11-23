@@ -18,9 +18,7 @@ const TableEvento = ({ dados, fnUpdate, fnDelete }) => {
           <th className="table-data__head-title table-data__head-title--big">
             Descrição
           </th>
-          <th className="table-data__head-title table-data__head-title--big">
-          Instituição
-          </th>
+        
           <th className="table-data__head-title table-data__head-title--big">
            TipoEvento
           </th>
@@ -46,9 +44,7 @@ const TableEvento = ({ dados, fnUpdate, fnDelete }) => {
           <td className="table-data__data table-data__data--big">
             {tp.descricao.substr(0,17)}
           </td>
-          <td className="table-data__data table-data__data--big">
-            {tp.Instituicao}
-          </td>
+       
           <td className="table-data__data table-data__data--big">
             {tp.idTipoEvento}
           </td>
@@ -70,7 +66,7 @@ const TableEvento = ({ dados, fnUpdate, fnDelete }) => {
               src={trashDelete}
               alt=""
               onClick={() => {
-                fnDelete(tp.idTipoEvento);
+                fnDelete(tp.idEvento);
               }}
             />
           </td>

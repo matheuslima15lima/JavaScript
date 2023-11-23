@@ -38,3 +38,35 @@ export const Button = ({textButton,id, name, type, additionalClass, manipulation
         </button>
     );
 }
+
+const dados = [
+    {value:"12356", text:"Vestuario Masculino"},
+    {value:"12356", text:"Vestuario Feminino"}
+
+];
+export const Select = ({
+    dados = [],
+    id,
+    name,
+    required,
+    additionalClass ="",
+    manipulationFunction,
+    defaultValue
+
+})=>{
+    return(
+        <select 
+            id={id}
+            name={name}
+            required={required}
+            className={`input-component ${additionalClass}`}
+            onChange={manipulationFunction}
+            value={defaultValue}
+        >
+            <option value="">Selecione</option>
+            {dados.map(opt =>{
+                return <option key={opt.idTipoEvento} value={opt.idTipoEvento}>{opt.titulo}</option>
+            })}
+        </select>
+    );
+}

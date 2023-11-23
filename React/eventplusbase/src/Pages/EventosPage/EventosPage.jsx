@@ -5,11 +5,12 @@ import MainContent from "../../components/MainContent/MainContent";
 import Container from "../../components/Container/Container";
 import ImageIllustrator from "../../components/ImageIllustrator/ImageIllustrator";
 import EventImage from "../../Assets/images/images/evento.svg";
-import { Input, Button } from "../../components/FormComponents/FormComponents";
+import { Input, Button, Select } from "../../components/FormComponents/FormComponents";
 import TableEvento from "./TableEv/TableEvento"
 import Spinner from "../../components/Spinner/Spinner";
 import api from "../../Services/Services";
 import Notification from "../../components/Notification/Notification";
+
 
 const EventosPage = () => {
   useEffect(() => {
@@ -17,8 +18,13 @@ const EventosPage = () => {
       setShowSpinner(true);
       try {
         const retorno = await api.get("/Evento");
-        console.log(retorno.data);
-        setEventos(retorno.data)
+        const retornoGet = await api.get("/TiposEvento");
+        const retornoGetIns = await api.get("/Instituicao")
+        console.log(retornoGetIns.data);
+        setEventos(retorno.data);
+        setIdInstituicao(retornoGetIns.data)
+        setIdTipoEvento(retornoGet.data);
+
       } catch (error) {
         console.log("deu ruim a api");
       }
@@ -33,7 +39,8 @@ const EventosPage = () => {
   const [frmEdit, setFrmEdit] = useState(false);
   const [nomeEvento, setNomeEvento] = useState("");
   const [Eventos, setEventos] = useState([]); //array mocado(provavelmente nao vou usar)
-
+  const [idInstituicao, setIdInstituicao] = useState([])
+  const[idTipoEvento, setIdTipoEvento] = useState([]);
   async function handleSubmit(e) {
     e.preventDefault();
 
@@ -61,6 +68,18 @@ const EventosPage = () => {
     } catch (error) {
       console.log("DEU RUIM NA API");
       console.log(error);
+    }
+  }
+
+  //****DELETAR EVENTO****/
+  async function handleDelete(idEvento)
+  {
+    try {
+      const retorno = await api.delete("/Evento/" + idEvento);
+      const retornoGet = await api.get("/Evento");
+      setEventos(retornoGet.data);
+    } catch (error) {
+      console.log("deu ruim no delete");
     }
   }
   return (
@@ -92,7 +111,40 @@ const EventosPage = () => {
                   }}
                  
                 />
+
+                
+                    <Input
+                        type={"text"}
+                        id={"descricao"}
+                        name={"descricao"}
+                        placeholder={"Adicione uma descrição..."}
+                        
+                    />
+                    
+                      <Select
+                        // id = {idTipoEvento}
+                        dados={idTipoEvento}//criar um state para tipoEvento e dar um get no useEffect
+                        name = {"TipoEvento"}
+                        required={"required"}
+                        
+                      
+                      />
+                      <Select
+                        // id = {idTipoEvento}
+                        dados={
+                        idInstituicao
+                        }//criar um state para tipoEvento e dar um get no useEffect
+                        name = {"Instituicao"}
+                        required={"required"}
+                        
+                        
+                      
+                      />
+                       
+                      
                    
+                    
+                 
                 <Input
                     type={"date"}
                     id = {"nome"}
@@ -102,6 +154,7 @@ const EventosPage = () => {
                     // value={data}
 
                 />
+
                 <span>{nomeEvento}</span>
 
                 <Button
@@ -109,7 +162,7 @@ const EventosPage = () => {
                   name={"Cadastrar"}
                   id={"cadastrar"}
                   textButton={"Cadastrar Evento"}
-                  // manipulationFunction={handleSubmit}
+                  manipulationFunction={handleSubmit}
                 />
                 </>
                 </form>
@@ -124,7 +177,7 @@ const EventosPage = () => {
           <TableEvento
             dados={Eventos}
             // fnUpdate={}
-            // fnDelete{}
+            fnDelete={handleDelete}
           />
             </Container>
       </section>

@@ -21,9 +21,24 @@ const EventosPage = () => {
         const retornoGet = await api.get("/TiposEvento");
         const retornoGetIns = await api.get("/Instituicao")
         console.log(retornoGetIns.data);
+
+        const tiposDeEvento = retornoGet.data
+        const arrayMod = []//array para guardar os valores
+
+        tiposDeEvento.forEach( e => { //foreach para ler os tiposEventos
+          arrayMod.push({
+            value: e.idTipoEvento,
+            text: e.titulo
+          })
+
+          setIdTipoEvento(arrayMod)
+
+        });
+
         setEventos(retorno.data);
         setIdInstituicao(retornoGetIns.data)
-        setIdTipoEvento(retornoGet.data);
+        
+        setIdTipoEvento();
 
       } catch (error) {
         console.log("deu ruim a api");
@@ -41,6 +56,7 @@ const EventosPage = () => {
   const [Eventos, setEventos] = useState([]); //array mocado(provavelmente nao vou usar)
   const [idInstituicao, setIdInstituicao] = useState([])
   const[idTipoEvento, setIdTipoEvento] = useState([]);
+  const [frmEditData, setFrmEditData] = useState([]);
   async function handleSubmit(e) {
     e.preventDefault();
 
@@ -123,22 +139,18 @@ const EventosPage = () => {
                     
                       <Select
                         // id = {idTipoEvento}
-                        dados={idTipoEvento}//criar um state para tipoEvento e dar um get no useEffect
-                        name = {"TipoEvento"}
+                        
+                        dados={idInstituicao}//criar um state para tipoEvento e dar um get no useEffect
+                        name = {"Tipo de evento"}
                         required={"required"}
                         
                       
                       />
                       <Select
                         // id = {idTipoEvento}
-                        dados={
-                        idInstituicao
-                        }//criar um state para tipoEvento e dar um get no useEffect
-                        name = {"Instituicao"}
+                        dados={idInstituicao}//criar um state para tipoEvento e dar um get no useEffect
+                        text = {"Instituicao"}
                         required={"required"}
-                        
-                        
-                      
                       />
                        
                       

@@ -31,9 +31,12 @@ const EventosPage = () => {
             text: e.titulo
           })
 
-          setIdTipoEvento(arrayMod)
+          
+
 
         });
+        setIdTipoEvento(arrayMod)
+       
 
         setEventos(retorno.data);
         setIdInstituicao(retornoGetIns.data)
@@ -140,7 +143,7 @@ const EventosPage = () => {
                       <Select
                         // id = {idTipoEvento}
                         
-                        dados={idInstituicao}//criar um state para tipoEvento e dar um get no useEffect
+                        dados={idTipoEvento}//criar um state para tipoEvento e dar um get no useEffect
                         name = {"Tipo de evento"}
                         required={"required"}
                         

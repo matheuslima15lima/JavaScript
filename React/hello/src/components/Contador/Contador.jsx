@@ -1,30 +1,31 @@
-import React, {useState} from "react";
-import './Contador.css';
+import React, { useState } from 'react';
 
 const Contador = () => {
+    const [contador, setContador] = useState(0);//dado do componente
 
-    const [contador, setContador] = useState(0)
-
-    function handleIncrementar(){
-        setContador(contador + 1);
+    function handleIncrementar() {
+        setContador( contador + 1 );
     }
 
-    function handleDecrementar(){
-        setContador(contador - 1);
-
-        //quando chegar no 0 ele vai parar
-        if (contador === 0) {
-          setContador(contador)
-         
-        }
+    function handleDecrementar() {
+        setContador( contador === 0 ? 0 : contador - 1 )
     }
+
     return (
-        <>
-            <p>{contador}</p>
-            <button onClick = {handleIncrementar}>Incrementar</button>
-            <button onClick = {handleDecrementar}>Decrementar</button>
-        </>
+        <div>
+            <h1>Contador</h1>
+
+            <p>{ contador }</p>
+
+            <button 
+                onClick={() => {handleIncrementar()}}
+            >
+                Incrementar
+            </button>
+
+            <button onClick={handleDecrementar}>Decrementar</button>
+        </div>
     );
-}
+};
 
 export default Contador;

@@ -1,62 +1,20 @@
-// import './App.css';
+import Title from "./components/Title/Title";
+import CardEvento from "./components/CardEvento/CardEvento";
 
-// import Titulo from './components/Titulo/Titulo';
+import Container from "./components/Container/Container";
 
-
-
-import './App.css';
-import Rotas from './routes';
+import "./App.css";
+import Contador from "./components/Contador/Contador";
+import Rotas from "./routes";
 
 function App() {
-  return(
-    <Rotas/>
+  // Criar as propriedades titulo, texto, textoLink
+  // passar as propriedades em cada um dios 3 componentes abaixo.
+  return (
+    <div className="App">
+      <Rotas />
+    </div>
   );
 }
+
 export default App;
-
-// import Contador from './components/Contador/Contador'
-// function App() {
-//   return (
-//     <div className="App">
-//    <Contador/>
-
-
-//     </div>
-//   );
-// }
-
-
-// import CardEvento from './components/CardEvento/CardEvento';
-
-// function App() {
-//   return (
-//     <div className="App">
-//       {/* <h1>Hello React</h1>
-//       <Titulo texto="Eduardo" />
-//       <Titulo texto="Matheus" />
-//       <Titulo texto="Carlos" />
-//       <Titulo texto="Pedro" />
-//       <br />
-//       <br />
-//       <CardEvento
-//         titulo="C#"
-//         text="Aprenda c# com o professor Carlos"
-//         conection="Conectar"
-
-
-//       />
-
-//       <CardEvento
-//        titulo="C#"
-//        text="Aprenda c# com o professor Carlos"
-//        conection="Reservar"
-//       desabilitar = {true}
-      
-//       /> */}
-
-
-//     </div>
-//   );
-// }
-
-// export default App;

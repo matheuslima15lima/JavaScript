@@ -11,6 +11,7 @@ import './HomePage.css'
 import api from "../../Services/Services";
 
 const HomePage = () => {
+  // const {userData} = useContext(UserContext)
 
     useEffect(()=> {
         //continuar aqui

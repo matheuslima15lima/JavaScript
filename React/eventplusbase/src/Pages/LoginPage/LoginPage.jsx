@@ -1,26 +1,33 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import ImageIllustrator from "../../components/ImageIllustrator/ImageIllustrator";
 import logo from "../../Assets/images/images/logo-pink.svg";
 import { Input, Button } from "../../components/FormComponents/FormComponents";
 import { useState } from "react";
 import api from "../../Services/Services";
-
+import { useNavigate } from "react-router-dom";
 import loginImage from "../../Assets/images/images/login.svg"
 
 import "./LoginPage.css";
+
 import { UserContext, userDecodeToken } from "../../context/AuthContext";
 
 const LoginPage = () => {
   
 const [user, setUser] = useState({email:"comum@comum.com", senha:"12345"});
 
-const [userData, setUserData] = useState(UserContext);
+//dados globais do usuario
+const {userData, setUserData} = useContext(UserContext);//PROBLEMA AQUI!!!!!!!! useContext 
+//RESOLVENDO O PROBLEMA:tinha que colocar chaves ao inves de colchetes porque eu estou importando essa variavel acima
 
+const navigate = useNavigate();
+useEffect(()=>{
+  if(userData.name) navigate("/");
+}, [userData])
     async function handleSubmit(e){
         e.preventDefault();
        
          
-
+        //validacao de caracteres
         if (user.email.length >= 3 && user.senha > 3) {
             //chamar a api
 
@@ -33,8 +40,9 @@ const [userData, setUserData] = useState(UserContext);
                 })
                 console.log(promise.data.token);
                 const userFullToken= userDecodeToken(promise.data.token);
-                setUserData(userFullToken)
-                localStorage.setItem("token", JSON.stringify( userFullToken))
+                setUserData(userFullToken)//guarda os dados decodificados
+                localStorage.setItem("token", JSON.stringify( userFullToken)) //transforma o objeto inteiro em string(Json)
+                navigate("/");//manda o usuario para home
                 console.log("DADOS DO USUARIO");
                 console.log(userData);
             } catch (error) {

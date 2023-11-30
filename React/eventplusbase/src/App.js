@@ -1,10 +1,16 @@
 import './App.css';
-import Rotas from './routes';
+import Rotas from './Routes/routes';
 import {UserContext} from "./context/AuthContext";
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 function App() {
-  const[userData, setUserData] = useState(UserContext);
+  const[userData, setUserData] = useState({});
+
+  useEffect(()=>{
+    const token = localStorage.getItem("token");//pega o token
+
+    setUserData(token === null ? {} : JSON.parse(token))
+  }, []);
   return (
    <UserContext.Provider value={{userData, setUserData}}>
 

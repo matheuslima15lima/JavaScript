@@ -20,7 +20,7 @@ const Nav = ({setExibeNavBar, exibeNavbar}) => {
             <Link to= "/">Home</Link>
             <Link to= "/tipo-eventos">Tipo Eventos</Link>
             <Link to= "/eventos">Eventos</Link>
-            <Link to= "/login">Login</Link>
+           
 
         </div>
        </nav>

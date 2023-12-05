@@ -2,7 +2,7 @@ import React from "react";
 
 import "./Toogle.css"
 
-const Toggle = ({ manipulationFunction = null, toggleActive = false }) => {
+const Toggle = ({ manipulationFunction = null, toggleActive = true }) => {
   return (
     <>
       {/* <input type="checkbox" id="switch-check" className="toggle__switch-check" /> */}

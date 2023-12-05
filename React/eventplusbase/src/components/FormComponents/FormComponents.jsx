@@ -80,4 +80,28 @@ export const Select = ({
     </select>
     </>
   );
+
+  // return (
+  //   <>
+  //    <select
+
+  //     id={id}
+  //     name={name}
+  //     required={required}
+  //     className={`input-component ${additionalClass}`}
+  //     onChange={manipulationFunction}
+  //     value={defaultValue}
+  //   >
+  //     <option value="">Selecione um {name}</option>
+  //     {dados.map((opt) => {
+  //       return (
+  //         <option key={opt.idTipoEvento} value={opt.idTipoEvento}>
+  //           {opt.Titulo}
+  //         </option>
+          
+  //       );
+  //     })}
+  //   </select>
+  //   </>
+  // );
 };

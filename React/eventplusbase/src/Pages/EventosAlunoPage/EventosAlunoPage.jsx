@@ -34,37 +34,42 @@ const EventosAlunoPage = () => {
   useEffect(() => {
     
 
-    async function loadEventsType(){
-          setShowSpinner(true);
-      try {
-        if (tipoEvento === "1") {//todos os eventos
-          const promise = await api.get("/Evento");
-          const promiseEventos = await api.get(`/PresencasEvento/ListarMinhas/${userData.userId}`);
-          const dadosMarcados = verificaPresenca(promise.data,promiseEventos.data)
-          // console.log( promise.data);
-        
-          console.log("DADOS MARCADOS");
-          console.log(dadosMarcados);
-          setEventos(promise.data);
-        }else{//meus eventos
-          let arrEventos = [];
-            const promiseEventos = await api.get(`/PresencasEvento/ListarMinhas/${userData.userId}`);
-            console.log(promiseEventos.data);
-            promiseEventos.data.forEach((element)=>{
-              arrEventos.push({...element.evento, situacao : element.situacao})
-            });
-            setEventos(arrEventos);
-        }
-       
-      } catch (error) {
-        console.log("Deu ruim no load");
-        console.log(error);
-      }
-       
-      setShowSpinner(false);
-    }
+
       loadEventsType();
   }, [tipoEvento, userData.userId]);
+
+  async function loadEventsType(){
+    setShowSpinner(true);
+try {
+  if (tipoEvento === "1") {//todos os eventos
+    const promise = await api.get("/Evento");
+    const promiseEventos = await api.get(`/PresencasEvento/ListarMinhas/${userData.userId}`);
+    const dadosMarcados = verificaPresenca(promise.data,promiseEventos.data)
+    // console.log( promise.data);
+  
+    console.log("DADOS MARCADOS");
+    console.log(dadosMarcados);
+    setEventos(promise.data);
+  }else{//meus eventos
+    let arrEventos = [];
+      const promiseEventos = await api.get(`/PresencasEvento/ListarMinhas/${userData.userId}`);
+      console.log(promiseEventos.data);
+      promiseEventos.data.forEach((element)=>{
+        arrEventos.push({...element.evento, 
+          situacao : element.situacao,
+          idPresencaEvento: element.idPresencaEvento,
+        })
+      });
+      setEventos(arrEventos);
+  }
+ 
+} catch (error) {
+  console.log("Deu ruim no load");
+  console.log(error);
+}
+ 
+setShowSpinner(false);
+}
 
   const verificaPresenca = (arrAllEvents, eventUser) =>{
     for (let x = 0; x < arrAllEvents.length; x++) {//para cada evento (todos)
@@ -72,6 +77,7 @@ const EventosAlunoPage = () => {
      for(let i =0; i<eventUser.length; i++){//verifica em meus eventos
       if(arrAllEvents[x].idEvento === eventUser[i].idEvento){
         arrAllEvents[x].situacao = true;
+        arrAllEvents[x].idPresencaEvento = eventUser[i].idPresencaEvento;
 
         break;
       }
@@ -88,7 +94,13 @@ const EventosAlunoPage = () => {
   }
 
   async function loadMyComentary(idComentary) {
-    return "????";
+    alert("carregar")
+  }
+  async function postMyComentary() {
+    alert("cadastrar comentario")
+  }
+  async function comentaryRemove() {
+    alert("Remover comentario")
   }
 
   const showHideModal = () => {
@@ -99,8 +111,28 @@ const EventosAlunoPage = () => {
     alert("Remover o comentário");
   };
 
-  function handleConnect() {
-    alert("Desenvolver a função conectar evento");
+ async function handleConnect(idEvent, whatTheFunction) {
+    if(whatTheFunction === "connect"){
+      
+      try {
+        const promise = api.post("/PresencaEvento",{
+          situacao: true,
+          idUsuario: userData.userId,
+          idEvento: idEvent,
+        });
+        if(promise.status === 201) {
+          loadEventsType();
+          alert("Presença confirmada, parabéns")
+        }
+      } catch (error) {
+        console.log("Erro ao conectar");
+        console.log(error);
+      }
+      return;
+    }
+    
+    //unconnect
+    alert("desconectar ao evento" + idEvent);
   }
   return (
     <>
@@ -136,6 +168,8 @@ const EventosAlunoPage = () => {
         <Modal
           userId={userData.userId}
           showHideModal={showHideModal}
+          fnGet={loadMyComentary}
+          fnPost={postMyComentary}
           fnDelete={commentaryRemove}
         />
       ) : null}

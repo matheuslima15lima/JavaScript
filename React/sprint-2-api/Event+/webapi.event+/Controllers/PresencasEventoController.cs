@@ -35,11 +35,11 @@ namespace webapi.event_.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post(PresencasEvento presencasEvento) 
+        public IActionResult Post(PresencasEvento presencasEvento)
         {
             try
             {
-                   _presencasEventoRepository.Inscrever(presencasEvento);
+                _presencasEventoRepository.Inscrever(presencasEvento);
                 return StatusCode(201);
             }
             catch (Exception e)
@@ -50,7 +50,7 @@ namespace webapi.event_.Controllers
         }
 
         [HttpGet("ListarMinhas/{id}")]
-        public IActionResult GetMyList(Guid id) 
+        public IActionResult GetMyList(Guid id)
         {
             try
             {
@@ -60,6 +60,34 @@ namespace webapi.event_.Controllers
             {
                 return BadRequest(e.Message);
 
+            }
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(Guid id) 
+        {
+            try
+            {
+                _presencasEventoRepository.Deletar(id);
+                return NoContent();
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [HttpGet("BuscarPorId/{id}")]
+        public IActionResult getByID(Guid id) 
+        {
+            try
+            {
+                return Ok(_presencasEventoRepository.BuscarPorId(id));
+            }
+            catch (Exception e)
+            {
+
+                return BadRequest(e.Message);
             }
         }
     }

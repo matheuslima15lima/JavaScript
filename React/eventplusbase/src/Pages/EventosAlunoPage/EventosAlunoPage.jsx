@@ -27,6 +27,8 @@ const EventosAlunoPage = () => {
   const [tipoEvento, setTipoEvento] = useState("1"); //código do tipo do Evento escolhido
   const [showSpinner, setShowSpinner] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [descricao, setDescricao] = useState("");
+  const [idEvento, setIdEvento] = useState([]);
 
   // recupera os dados globais do usuário
   const { userData, setUserData } = useContext(UserContext);
@@ -96,8 +98,30 @@ setShowSpinner(false);
   async function loadMyComentary(idComentary) {
     alert("carregar")
   }
-  async function postMyComentary() {
-    alert("cadastrar comentario")
+  async function postMyComentary(idEvent) {
+    // if (descricao.trim().length < 1){
+    //   alert("Voce nao comentou nada");
+    //   return;
+    // }
+
+    try {
+       const promise = await api.post("/ComentariosEvento", {
+        descricao: descricao,
+        exibe: true,
+        idUsuario: userData.userId,
+        idEvento: idEvent,
+       }
+     )
+
+      console.log("COMENTARIO CADASTRADO");
+      console.log(promise.data);
+      setDescricao("");
+    } catch (error) {
+      console.log("Deu ruim no cadastro de evento"
+      
+      );
+    }
+
   }
   async function comentaryRemove() {
     alert("Remover comentario")

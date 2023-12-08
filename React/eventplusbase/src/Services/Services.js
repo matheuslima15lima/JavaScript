@@ -2,10 +2,10 @@ import axios from "axios"
 
 const apiPort = '7118';
 const localApi =`https://localhost:${apiPort}/api`;
-const externaApi = null;
+const externaApi = `https://webapimatheusl.azure-api.net`;
 
 const api = axios.create({
-    baseURL : localApi
+    baseURL :externaApi
 });
 
 export default api;

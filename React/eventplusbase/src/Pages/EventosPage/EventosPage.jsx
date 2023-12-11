@@ -10,6 +10,7 @@ import TableEvento from "./TableEv/TableEvento"
 import Spinner from "../../components/Spinner/Spinner";
 import api from "../../Services/Services";
 import Notification from "../../components/Notification/Notification";
+import { dateFormatDbToView } from "../../Utils/StringFunction";
 
 
 const EventosPage = () => {
@@ -114,9 +115,9 @@ const EventosPage = () => {
 
             <form
               className="ftipo-evento"
-              //********SUBMIT AQUI!!!!! ********/
+              onSubmit={frmEdit ? handleUpdate : handleSubmit}
             >
-              {/* FRM EDIT AQUI!!!!!! */}
+              {!frmEdit? (
               <>
                 <Input
                   type={"text"}
@@ -183,6 +184,85 @@ const EventosPage = () => {
                   manipulationFunction={handleSubmit}
                 />
                 </>
+                ) : (
+                    <>
+                  <Input
+                  type={"text"}
+                  id={"nome"}
+                  name={"nome"}
+                  placeholder={"Digite o nome do evento..."}
+                  required={"required"}
+                  value={nomeEvento}
+                  manipulationFunction={(e)=>{
+                    setNomeEvento(e.target.value);
+                  }}
+                 
+                />
+
+                
+                    <Input
+                        type={"text"}
+                        id={"descricao"}
+                        name={"descricao"}
+                        placeholder={"Adicione uma descrição..."}
+                        
+                    />
+                    
+                      <Select
+                        // id = {idTipoEvento}
+                        
+                        dados={idTipoEvento}//criar um state para tipoEvento e dar um get no useEffect
+                        name = {"Tipo de evento"}
+                        id={"tEvento"}
+                       manipulationFunction={(e) =>{
+                        setIdTipoEvento(e.target.value);
+                       }}
+                        
+                      
+                      />
+                      <Select
+                        // id = {idTipoEvento}
+                        dados={idInstituicao}//criar um state para tipoEvento e dar um get no useEffect
+                        text = {"Instituicao"}
+                        required={"required"}
+                      />
+                       
+                      
+                   
+                    
+                 
+                <Input
+                    type={"date"}
+                    id = {"nome"}
+                    name={"data"}
+                    placeholder={"digite data"}
+                    required={"required"}
+                    value={dateFormatDbToView(data)}
+                    
+                />
+
+                
+                <div className="buttons-editbox">
+                <Button
+                  type={"submit"}
+                  name={"atualizar"}
+                  id={"atualizar"}
+                  textButton={"atualizar"}
+                  additionalClass="button-component--middle"
+                />
+                <Button
+                  type={"button"}
+                  name={"cancelar"}
+                  id={"cancelar"}
+                  textButton={"Cancelar"}
+                  additionalClass="button-component--middle"
+                  manipulationFunction={editionActionAbort}
+                />
+                </div>
+                </>
+
+
+                ) }
                 </form>
             </div>
             </Container>

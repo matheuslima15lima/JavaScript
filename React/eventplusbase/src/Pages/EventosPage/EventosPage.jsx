@@ -145,7 +145,10 @@ const EventosPage = () => {
                         
                         dados={idTipoEvento}//criar um state para tipoEvento e dar um get no useEffect
                         name = {"Tipo de evento"}
-                        required={"required"}
+                        id={"tEvento"}
+                       manipulationFunction={(e) =>{
+                        setIdTipoEvento(e.target.value);
+                       }}
                         
                       
                       />

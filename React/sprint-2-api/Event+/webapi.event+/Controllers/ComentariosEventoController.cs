@@ -43,7 +43,7 @@ namespace webapi.event_.Controllers
 
                 //realiza a moderacao do conteudo(descricao do comentario)
                 var moderationResult = await _contentModeratorClient.TextModeration
-                    .ScreenTextAsync("text/plan", stream, "por", false, false, null, true);
+                    .ScreenTextAsync("text/plain", stream, "por", false, false, null, true);
 
                 //Se existir termos ofensivos 
                 if(moderationResult.Terms != null) 
